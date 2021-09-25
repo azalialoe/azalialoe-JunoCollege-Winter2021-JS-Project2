@@ -3,11 +3,23 @@
 
 const numbersApp = {};
 
+
 // AJAX
 // get info from API http://numbersapi.com/
 numbersApp.getNumberFacts = (inputNumber) => {
-    // console.log(inputNumber)
-    $.ajax(`http://numbersapi.com/${inputNumber}`).then((numberFacts) => {
+    
+    const reqUrl = `http://numbersapi.com/${inputNumber}/`;
+    
+    $.ajax({url: 'https://proxy.hackeryou.com',
+            dataType: 'html',
+            method:'GET',
+            data: {
+                reqUrl: reqUrl },
+                xmlToJSON: false,
+                useCache: false,
+    }) 
+    .then((numberFacts) => {
+        
         $('h1').empty();
         numbersApp.displayFacts(numberFacts);
     })
